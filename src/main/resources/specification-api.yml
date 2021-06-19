@@ -1,0 +1,37 @@
+openapi: 3.0.0
+
+info:
+  version: "v1"
+  title: Currency Converter Api
+
+paths:
+  /currency:
+    get:
+      description: get suportted currencies
+      operationId: getSuportedCurrencies
+
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/currency'
+        404:
+          description: Currency not found
+
+components:
+  schemas:
+
+    currency:
+      description: this is the currency model
+      type: object
+      properties:
+        id:
+          description: identity
+          type: integer
+        name:
+          description: name from currency
+          type: string
