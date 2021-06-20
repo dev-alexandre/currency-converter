@@ -1,17 +1,16 @@
-package challenger.com.br.api;
+package challenger.com.br.service;
 
 import challenger.com.br.model.Currency;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
-public class CurrencyController implements CurrencyApi {
+@Service
+public class CurrencyService {
 
-    @Override
     public ResponseEntity<List<Currency>> getSuportedCurrencies() {
 
         List<Currency> currencies = new ArrayList<>();
@@ -22,5 +21,4 @@ public class CurrencyController implements CurrencyApi {
 
         return new ResponseEntity<>(currencies, HttpStatus.OK);
     }
-
 }

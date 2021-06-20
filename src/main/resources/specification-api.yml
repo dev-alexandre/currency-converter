@@ -8,7 +8,7 @@ paths:
   /currency:
     get:
       description: get suportted currencies
-      operationId: getSuportedCurrencies
+      operationId: getSuporttedCurrencies
 
       responses:
         200:
@@ -21,7 +21,9 @@ paths:
                   $ref: '#/components/schemas/currency'
         404:
           description: Currency not found
-
+  /users:
+    get:
+      description: get
 components:
   schemas:
 
