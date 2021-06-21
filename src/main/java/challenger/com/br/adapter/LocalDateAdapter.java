@@ -1,4 +1,4 @@
-package challenger.com.br.adpter;
+package challenger.com.br.adapter;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -11,9 +11,9 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class LocalDateAdpter implements JsonDeserializer<LocalDate> {
+public class LocalDateAdapter implements JsonDeserializer<LocalDate> {
 
-    Logger logger = LoggerFactory.getLogger(LocalDateAdpter.class);
+    Logger logger = LoggerFactory.getLogger(LocalDateAdapter.class);
 
     @Override
     public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

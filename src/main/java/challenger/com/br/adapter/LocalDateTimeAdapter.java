@@ -1,4 +1,4 @@
-package challenger.com.br.adpter;
+package challenger.com.br.adapter;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -12,9 +12,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-public class LocalDateTimeAdpter implements JsonDeserializer<LocalDateTime> {
+public class LocalDateTimeAdapter implements JsonDeserializer<LocalDateTime> {
 
-    Logger logger = LoggerFactory.getLogger(LocalDateTimeAdpter.class);
+    Logger logger = LoggerFactory.getLogger(LocalDateTimeAdapter.class);
 
     @Override
     public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

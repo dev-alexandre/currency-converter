@@ -22,5 +22,5 @@ public class ExchangeRatesResponseDTO implements Serializable {
 
     private LocalDateTime timestamp;
 
-    private Map<String, String> rates;
+    private Map<String, Double> rates;
 }

@@ -1,4 +1,4 @@
-package challenger.com.br.adpter;
+package challenger.com.br.adapter;
 
 import com.google.gson.*;
 import org.slf4j.Logger;
@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class MapAdpter implements JsonDeserializer<Map> {
+public class HashMapAdapter implements JsonDeserializer<Map> {
 
-    Logger logger = LoggerFactory.getLogger(MapAdpter.class);
+    Logger logger = LoggerFactory.getLogger(HashMapAdapter.class);
 
     @Override
     public Map deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

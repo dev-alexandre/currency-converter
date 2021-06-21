@@ -4,26 +4,105 @@ info:
   version: "v1"
   title: Currency Converter Api
 
-paths:
-  /currency:
-    get:
-      description: get suportted currencies
-      operationId: getSuporttedCurrencies
+servers:
+  - url: http://{server}/v1
+    variables:
+      server:
+        default: 'localhost:8080'
 
+paths:
+
+  /converter/user/{userId}/from/{currencyFrom}/to/{currencyTo}/amount/{amount}:
+    get:
+      description: ''
+      operationId: ConverterAmount
       responses:
         200:
-          description: successful operation
+          description: ''
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/currency'
-        404:
-          description: Currency not found
-  /users:
-    get:
-      description: get
+                type: object
+
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+
+        - in: path
+          name: currencyFrom
+          schema:
+            type: string
+          required: true
+          description: currency identity code ex USD or BRL
+
+        - in: path
+          name: currencyTo
+          schema:
+            type: string
+          required: true
+          description: currency identity code ex USD or BRL
+
+        - in: path
+          name: amount
+          schema:
+            type: number
+          required: true
+          description: currency identity code ex USD or BRL
+
+  #/user:
+  #  get:
+  #    description: ''
+  #    operationId: ''
+  #    responses:
+  #      200:
+  #        description: ''
+  #        content:
+  #          application/json:
+  #            schema:
+  #              type: object
+
+  #/v1/currency:
+  #  get:
+  #    description: get suportted currencies
+  #    operationId: getSuportedCurrencies
+
+  #    responses:
+  #      200:
+  #        description: successful operation
+  #        content:
+  #          application/json:
+  #            schema:
+  #              type: array
+  #              items:
+  #                $ref: '#/components/schemas/currency'
+  #      404:
+  #        description: Currency not found
+
+  #/v1/audit/user/{userId}:
+  #  get:
+  #    description: get transactions from user
+  #    operationId: getTransactionsUser
+  #    parameters:
+  #      - in: path
+  #        name: userId
+  #        schema:
+  #          type: integer
+  #        required: true
+  #        description: Numeric ID of the user to get
+  #    responses:
+  #      200:
+  #        description: sucessful operation
+  #        content:
+  #          application/json:
+  #            schema:
+  #              type: object
+  #              items:
+  #                $ref: '#/components/schemas/user'
+
 components:
   schemas:
 
@@ -36,4 +115,15 @@ components:
           type: integer
         name:
           description: name from currency
+          type: string
+
+    user:
+      description: this is the user model
+      type: object
+      properties:
+        id:
+          description: identity
+          type: integer
+        name:
+          description: name from user
           type: string
