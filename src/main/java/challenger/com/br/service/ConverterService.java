@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +34,17 @@ public class ConverterService {
             }
         });
 
-        MonetaryAmount monetaryAmountFrom = monetaryAmounts.stream().filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyFrom)).findAny().get();
-        MonetaryAmount monetaryAmountTo = monetaryAmounts.stream().filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyTo)).findAny().get();
-        MonetaryAmount amount1 = monetaryAmountTo.divide(monetaryAmountFrom.getNumber()).multiply(amount);
+        var monetaryAmountFrom = monetaryAmounts.stream().filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyFrom)).findAny().get();
+        var monetaryAmountTo = monetaryAmounts.stream().filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyTo)).findAny().get();
+        var amount1 = monetaryAmountTo.divide(monetaryAmountFrom.getNumber()).multiply(amount);
+        var bigDecimal = BigDecimal.valueOf(amount1.getNumber().doubleValueExact());
 
         ConvertResponseDTO response =
             ConvertResponseDTO
                 .builder()
                     .success(true)
-                    .result(new BigDecimal(amount1.getNumber().doubleValueExact()))
+                    .date(exchangeRates.getDate())
+                    .result(bigDecimal.setScale(2, RoundingMode.HALF_DOWN))
                     .query(
                         ConvertQueryDTO
                             .builder()

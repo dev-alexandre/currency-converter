@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class ConvertResponseDTO {
 
     private Boolean success;
-    private LocalDateTime date;
+    private LocalDate date;
     private BigDecimal result;
     private ConvertQueryDTO query;
 

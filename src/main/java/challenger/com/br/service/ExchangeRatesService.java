@@ -3,6 +3,7 @@ package challenger.com.br.service;
 import challenger.com.br.config.AppConfig;
 import challenger.com.br.config.AppRetrofit;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
+import challenger.com.br.exception.ThirdPartyException;
 import challenger.com.br.repository.ExchangeRatesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,11 @@ public class ExchangeRatesService {
         try {
 
             Response<ExchangeRatesResponseDTO> response = callSync.execute();
-            ExchangeRatesResponseDTO exchangeRatesResponseDTO = response.body();
-
-            return exchangeRatesResponseDTO;
+            return response.body();
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new RuntimeException();
+            throw new ThirdPartyException("A third party service is not working as it should, wait a while and try again in a few minutes");
         }
     }
 

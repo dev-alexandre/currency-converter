@@ -20,13 +20,11 @@ public class LocalDateTimeAdapter implements JsonDeserializer<LocalDateTime> {
     public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         logger.debug("deserialize string {} to pattern", jsonElement.getAsString());
 
-        String rawString = jsonElement.getAsString();
+        var rawString = jsonElement.getAsString();
 
         try {
-            long jsonValueAsLong = Long.valueOf(rawString);
-
-            LocalDateTime localDateTime = Instant.ofEpochMilli(jsonValueAsLong).atZone(ZoneId.systemDefault()).toLocalDateTime();
-            return localDateTime;
+            var jsonValueAsLong = Long.parseLong(rawString);
+            return Instant.ofEpochMilli(jsonValueAsLong).atZone(ZoneId.systemDefault()).toLocalDateTime();
 
         } catch (Exception e){
             logger.debug("Value {} can't be converted to LocalDateTime", rawString);
