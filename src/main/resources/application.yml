@@ -5,3 +5,5 @@ api:
     baseUrl: "http://api.exchangeratesapi.io/"
     key: "7f7671223482746ce8247497072a30b5"
 
+  format:
+    date-time: yyyy-mm-dd hh:mm:ss

@@ -177,6 +177,7 @@
 							<modelPackage>challenger.com.br.model</modelPackage>
 
 							<configOptions>
+								<reactive>true</reactive>
 								<interfaceOnly>true</interfaceOnly>
 							</configOptions>
 

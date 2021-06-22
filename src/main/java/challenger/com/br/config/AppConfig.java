@@ -14,4 +14,8 @@ public class AppConfig {
     @Value("${api.exchange-rates-api.key}")
     private String apiExchangeRatesBaseKey;
 
+    @Value("${api.format.date-time}")
+    private String apiFormatDateTime;
+
+
 }
