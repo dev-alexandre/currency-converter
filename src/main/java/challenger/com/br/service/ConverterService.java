@@ -73,6 +73,7 @@ public class ConverterService {
             ConvertQueryDTO
                 .builder()
                 .amount(amount)
+                .amountValue(result)
                 .from(currencyFrom)
                 .to(currencyTo)
             .build()
@@ -95,15 +96,15 @@ public class ConverterService {
     public void validCurrency(String currency, ExchangeRatesResponseDTO exchangeRates){
 
         if(!exchangeRates.getRates().containsKey(currency)){
-            logger.info("This currency { } is not supported yet ", currency);
+            logger.info("This currency { $s } is not supported yet ", currency);
             throw new BadParameterException("This currency {"+ currency + "} is not supported yet: see values accepted in /currency/accepted");
         }
     }
 
     public void validAmount(BigDecimal amount){
 
-        if(amount.compareTo(BigDecimal.ZERO) == -1){
-            logger.info("It is not possible to calculate a amount less than zero {}", amount.intValue() );
+        if(amount.compareTo(BigDecimal.ZERO) < 0){
+            logger.info("It is not possible to calculate a amount less than zero { $i }", amount.intValue() );
             throw new BadParameterException("It is not possible to calculate a amount less than zero {"+ amount.intValue() +"}");
         }
 

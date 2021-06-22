@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ConvertResponseDTO {
 
+    private Integer userId;
     private Boolean success;
     private LocalDate date;
     private BigDecimal result;

@@ -12,5 +12,6 @@ public class ConvertQueryDTO {
     private String from;
     private String to;
     private BigDecimal amount;
+    private BigDecimal amountValue;
 
 }
