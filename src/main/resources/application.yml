@@ -21,16 +21,11 @@ spring:
     hbm2ddl:
       auto: update
     show_sql: true
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-  flyway:
-    url: jdbc:h2:~/file/converter;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-    baseline-on-migrate: true
+  #jpa:
+  #  database-platform: org.hibernate.dialect.H2Dialect
+  #  hibernate:
+  #    ddl-auto: create
+  #  show-sql: true
 
 api:
   exchange-rates-api:

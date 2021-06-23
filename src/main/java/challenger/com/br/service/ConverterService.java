@@ -40,10 +40,8 @@ public class ConverterService {
              * @TODO do this better
              * */
             if(Monetary.isCurrencyAvailable(key)){
-                monetaryAmounts.add(Money.of(value, key )
-                );
+                monetaryAmounts.add(Money.of(value, key ));
             }
-
         });
 
         var monetaryAmountFrom = monetaryAmounts
@@ -77,11 +75,11 @@ public class ConverterService {
        return Operation
         .builder()
         .userId(userId)
-        .date(exchangeRates.getDate())
+        .operationDate(exchangeRates.getDate())
         .result(result)
            .amount(amount)
-           .from(currencyFrom)
-           .to(currencyTo)
+           .currencyFrom(currencyFrom)
+           .currencyTo(currencyTo)
         .build();
     }
 

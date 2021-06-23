@@ -20,6 +20,8 @@
 		<java.version>11</java.version>
 		<swagger.version>2.9.2</swagger.version>
 		<swagger-codegen-maven-plugin-version>2.3.1</swagger-codegen-maven-plugin-version>
+
+		<retrofit.version>2.9.0</retrofit.version>
 	</properties>
 
 	<dependencies>
@@ -37,6 +39,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-r2dbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-r2dbc</artifactId>
+			<version>1.3.2</version>
 		</dependency>
 
 		<dependency>
@@ -122,15 +130,17 @@
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>retrofit</artifactId>
-			<version>2.3.0</version>
+			<version>${retrofit.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>converter-gson</artifactId>
-			<version>2.3.0</version>
+			<version>${retrofit.version}</version>
 		</dependency>
 
+
+		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -138,6 +148,7 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- JAVA MONEY -->
 		<dependency>
 			<groupId>org.javamoney</groupId>
 			<artifactId>moneta</artifactId>

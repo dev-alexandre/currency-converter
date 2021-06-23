@@ -5,18 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table
+@EntityScan
+@Table("operation")
 public class Operation {
 
     @JsonProperty("TransactionID")
@@ -26,16 +27,16 @@ public class Operation {
     private Integer userId;
 
     @NotNull
-    private LocalDate date;
+    private LocalDate operationDate;
 
     @NotNull
     private BigDecimal result;
 
     @NotNull
-    private String from;
+    private String currencyFrom;
 
     @NotNull
-    private String to;
+    private String currencyTo;
 
     @NotNull
     private BigDecimal amount;
