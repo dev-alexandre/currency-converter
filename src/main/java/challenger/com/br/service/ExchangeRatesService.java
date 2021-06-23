@@ -1,16 +1,20 @@
 package challenger.com.br.service;
 
+import challenger.com.br.config.AppCache;
 import challenger.com.br.config.AppConfig;
 import challenger.com.br.config.AppRetrofit;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.exception.ThirdPartyException;
-import challenger.com.br.repository.ExchangeRatesRepository;
+import challenger.com.br.repository.retrofit.ExchangeRatesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Service
 public class ExchangeRatesService {
@@ -22,7 +26,20 @@ public class ExchangeRatesService {
     @Autowired
     private AppRetrofit retrofit;
 
+    @Autowired
+    private AppCache appCache;
+
     public ExchangeRatesResponseDTO getExchangeRates(){
+        logger.info("Getting exchange rates");
+
+        if(appCache.getExchangeRatesResponseDTO() != null && LocalDate.now().isEqual(appCache.getExchangeRatesResponseDTO().getDate())){
+            return appCache.getExchangeRatesResponseDTO();
+        }
+
+        return loadExchangeRatesRepository();
+    }
+
+    public ExchangeRatesResponseDTO loadExchangeRatesRepository(){
         logger.info("Calling exchange rates api");
 
         ExchangeRatesRepository repository = retrofit.getRetrofit().create(ExchangeRatesRepository.class);
@@ -31,13 +48,15 @@ public class ExchangeRatesService {
         try {
 
             Response<ExchangeRatesResponseDTO> response = callSync.execute();
-            return response.body();
+            ExchangeRatesResponseDTO result = response.body();
+            result.setCurrencies(new ArrayList<>(result.getRates().keySet()));
+            appCache.setExchangeRatesResponseDTO(result);
+
+            return result;
 
         } catch (Exception ex) {
             logger.error("Error calling exchange rates api", ex);
             throw new ThirdPartyException("A third party service is not working as it should, wait a while and try again in a few minutes");
         }
     }
-
-
 }

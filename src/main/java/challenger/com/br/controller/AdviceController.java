@@ -27,7 +27,7 @@ public class AdviceController {
     }
 
     @ExceptionHandler(value = BadParameterException.class)
-    public ResponseEntity<?> BadParameterException(final BadParameterException exception) {
+    public ResponseEntity<Map<String, Object>> badParameterException(final BadParameterException exception) {
         return new ResponseEntity<>(getBody(exception), HttpStatus.BAD_REQUEST);
     }
 

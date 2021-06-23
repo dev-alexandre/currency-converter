@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class ExchangeRatesResponseDTO implements Serializable {
 
-    private Boolean success;
+    private Integer userId;
 
     private String base;
 
@@ -23,4 +24,6 @@ public class ExchangeRatesResponseDTO implements Serializable {
     private LocalDateTime timestamp;
 
     private Map<String, Double> rates;
+
+    private List<String> currencies;
 }

@@ -17,5 +17,4 @@ public class AppConfig {
     @Value("${api.format.date-time}")
     private String apiFormatDateTime;
 
-
 }
