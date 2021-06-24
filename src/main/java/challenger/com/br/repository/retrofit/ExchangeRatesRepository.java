@@ -1,4 +1,4 @@
-package challenger.com.br.repository;
+package challenger.com.br.repository.retrofit;
 
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import retrofit2.Call;

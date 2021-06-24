@@ -19,11 +19,10 @@ public class LocalDateAdapter implements JsonDeserializer<LocalDate> {
     public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         logger.debug("deserialize string {} to pattern yyyy-MM-dd", jsonElement.getAsString());
 
-        String rawString = jsonElement.getAsString();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateTime = LocalDate.parse(rawString, formatter);
+        var rawString = jsonElement.getAsString();
+        var formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        return dateTime;
+        return LocalDate.parse(rawString, formatter);
 
     }
 }

@@ -1,7 +1,36 @@
-
+spring:
+  datasource:
+    continue-on-error: true
+    driver-class-name: org.h2.Driver
+    initialize: true
+    platform: h2
+    url: jdbc:h2:~/file/converter;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    name: converter
+  error:
+    whitelabel:
+      enabled: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+      settings:
+        trace: true
+        web-allow-others: true
+  hibernate:
+    hbm2ddl:
+      auto: update
+    show_sql: true
 
 api:
   exchange-rates-api:
     baseUrl: "http://api.exchangeratesapi.io/"
     key: "7f7671223482746ce8247497072a30b5"
+
+  format:
+    date-time: yyyy-mm-dd hh:mm:ss
+    date: yyyy-mm-dd
+    time: hh:mm:ss
+    timezone: UTC
 
