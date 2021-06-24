@@ -20,7 +20,8 @@ public class UserController {
     @GetMapping(
         value = "/user/historical/{userId}",
         produces = {"application/json"})
-    public Flux<Operation> listOperationByUser( @PathVariable Integer userId){
+    public Flux<Operation> listOperationByUser(@PathVariable Integer userId){
+        logger.info("Caller User Controller");
         return service.listOperationByUser(userId);
     }
 

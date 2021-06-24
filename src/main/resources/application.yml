@@ -32,4 +32,5 @@ api:
     date-time: yyyy-mm-dd hh:mm:ss
     date: yyyy-mm-dd
     time: hh:mm:ss
+    timezone: UTC
 

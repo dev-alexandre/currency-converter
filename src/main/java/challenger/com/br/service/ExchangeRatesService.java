@@ -1,7 +1,7 @@
 package challenger.com.br.service;
 
 import challenger.com.br.config.AppCache;
-import challenger.com.br.config.AppConfig;
+import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.config.AppRetrofit;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.exception.ThirdPartyException;
@@ -21,7 +21,7 @@ public class ExchangeRatesService {
     Logger logger = LoggerFactory.getLogger(ExchangeRatesService.class);
 
     @Autowired
-    private AppConfig appConfig;
+    private AppEnvironment appConfig;
 
     @Autowired
     private AppRetrofit retrofit;
@@ -30,9 +30,10 @@ public class ExchangeRatesService {
     private AppCache appCache;
 
     public ExchangeRatesResponseDTO getExchangeRates(){
-        logger.info("Getting exchange rates");
+
 
         if(appCache.getExchangeRatesResponseDTO() != null && LocalDate.now().isEqual(appCache.getExchangeRatesResponseDTO().getDate())){
+            logger.info("Getting exchange rates from cache");
             return appCache.getExchangeRatesResponseDTO();
         }
 

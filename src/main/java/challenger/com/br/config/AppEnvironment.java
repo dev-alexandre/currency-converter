@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Component
-public class AppConfig {
+public class AppEnvironment {
 
     @Value("${api.exchange-rates-api.baseUrl}")
     private String apiExchangeRatesBaseUrl;
@@ -16,5 +16,8 @@ public class AppConfig {
 
     @Value("${api.format.date-time}")
     private String apiFormatDateTime;
+
+    @Value("${api.format.timezone}")
+    private String timeZone;
 
 }

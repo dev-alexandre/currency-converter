@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class ConverterService {
 
     @Autowired
     private OperationRepository operationRepository;
+
+    @Autowired
+    private CalculationEngine calculationEngine;
 
     public Mono<Operation> converterAmount(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount) {
 
@@ -64,7 +68,7 @@ public class ConverterService {
                         currencyTo,
                         amount,
                         exchangeRates,
-                        new CalculationEngine().calculate( monetaryAmountFrom ,  monetaryAmountTo,  amount));
+                        calculationEngine.calculate( monetaryAmountFrom ,  monetaryAmountTo,  amount));
 
         operationRepository.save(responseObject).subscribe();
 
@@ -75,9 +79,9 @@ public class ConverterService {
        return Operation
         .builder()
         .userId(userId)
-        .operationDate(exchangeRates.getDate())
-        .result(result)
-           .amount(amount)
+        .operationDate(LocalDateTime.now())
+        .amountTo(result)
+           .amountFrom(amount)
            .currencyFrom(currencyFrom)
            .currencyTo(currencyTo)
         .build();

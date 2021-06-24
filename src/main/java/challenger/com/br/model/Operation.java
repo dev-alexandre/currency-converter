@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -27,10 +27,7 @@ public class Operation {
     private Integer userId;
 
     @NotNull
-    private LocalDate operationDate;
-
-    @NotNull
-    private BigDecimal result;
+    private LocalDateTime operationDate;
 
     @NotNull
     private String currencyFrom;
@@ -39,6 +36,9 @@ public class Operation {
     private String currencyTo;
 
     @NotNull
-    private BigDecimal amount;
+    private BigDecimal amountFrom;
+
+    @NotNull
+    private BigDecimal amountTo;
 
 }
