@@ -26,6 +26,7 @@
 		<sonar.projectKey>dev-alexandre_currency-converter</sonar.projectKey>
 		<sonar.organization>dev-alexandre</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.exclusions>**/model/*,**/dto/*,</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
