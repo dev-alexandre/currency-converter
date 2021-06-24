@@ -21,7 +21,6 @@ class AppRetrofitTest {
     @Test
     void testingRetrofitInitializerAndOptions() {
         var retrofit = appRetrofit.getRetrofit();
-
         assertNotNull(retrofit);
         assertEquals(retrofit.baseUrl().toString(), appEnvironment.getApiExchangeRatesBaseUrl());
     }

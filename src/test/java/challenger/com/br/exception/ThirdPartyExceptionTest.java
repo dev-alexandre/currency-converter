@@ -19,4 +19,5 @@ class ThirdPartyExceptionTest {
         var thirdPartyException = new ThirdPartyException(exampleMessage);
         assertEquals(thirdPartyException.getMessage(), exampleMessage);
     }
+
 }

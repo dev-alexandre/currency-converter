@@ -20,7 +20,6 @@ class AppEnvironmentTest {
 
     @Test
     void notNullValuesFromAppEnvironment() {
-
         assertNotNull(appEnvironment.getApiExchangeRatesBaseUrl());
         assertNotNull(appEnvironment.getApiExchangeRatesBaseKey());
         assertNotNull(appEnvironment.getApiFormatDateTime());

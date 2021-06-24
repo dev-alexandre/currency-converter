@@ -22,6 +22,10 @@
 		<swagger-codegen-maven-plugin-version>2.3.1</swagger-codegen-maven-plugin-version>
 
 		<retrofit.version>2.9.0</retrofit.version>
+
+		<sonar.projectKey>dev-alexandre_currency-converter</sonar.projectKey>
+		<sonar.organization>dev-alexandre</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencies>
@@ -152,6 +156,7 @@
 			<artifactId>moneta</artifactId>
 			<version>1.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
@@ -175,37 +180,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>io.swagger.codegen.v3</groupId>
-				<artifactId>swagger-codegen-maven-plugin</artifactId>
-				<version>3.0.18</version>
-				<executions>
-					<execution>
-
-						<goals>
-							<goal>generate</goal>
-						</goals>
-
-						<configuration>
-
-							<inputSpec>${project.basedir}/src/main/resources/specification-api.yml</inputSpec>
-							<language>spring</language>
-							<output>${project.build.directory}/generated-sources/</output>
-							<generateSupportingFiles>false</generateSupportingFiles>
-							<apiPackage>challenger.com.br.api</apiPackage>
-							<modelPackage>challenger.com.br.model</modelPackage>
-
-							<configOptions>
-								<reactive>true</reactive>
-								<interfaceOnly>true</interfaceOnly>
-							</configOptions>
-
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 
 		</plugins>
 	</build>
