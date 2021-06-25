@@ -18,7 +18,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class AdviceController {
-    Logger logger = LoggerFactory.getLogger(AdviceController.class);
+    final Logger logger = LoggerFactory.getLogger(AdviceController.class);
 
     @Autowired
     public AppEnvironment appEnvironment;

@@ -15,17 +15,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @ContextConfiguration
 class HashMapAdapterTest {
 
     private final String path = "src/test/java/resources/hashMapAdapter/";
-    private final String ratesMiniumExampleFunctional = path + "rates-minimum-example-functional.json";
     private final String ratesExtensiveExampleFunctional = path + "rates-extensive-example-functional.json";
     private final String ratesExampleWithEmptyKey = path + "rates-example-with-problem-empty-key.json";
-    private final String ratesExampleWithEmptyValue = path + "rates-example-with-problem-empty-value.json";
 
     private Gson deserialize;
 
@@ -37,13 +33,14 @@ class HashMapAdapterTest {
 
     @Test
     void deserializeMinimalData() throws IOException {
-        var data = Files.readString(Paths.get(ratesMiniumExampleFunctional));
+        String ratesMinimumExampleFunctional = path + "rates-minimum-example-functional.json";
+        var data = Files.readString(Paths.get(ratesMinimumExampleFunctional));
 
         final String currencyTest = "AED";
         Map<String, Double> result =  deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType());
-        assertNotNull(result);
-        assertEquals(result.size(), 1);
-        assertTrue(result.containsKey(currencyTest));
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.size(), 1);
+        Assertions.assertTrue(result.containsKey(currencyTest));
         Double aed = java.util.Optional.ofNullable(result.get(currencyTest)).orElse(-1D);
         Assertions.assertEquals(aed, 4.386531D);
     }
@@ -51,32 +48,35 @@ class HashMapAdapterTest {
 
     @Test
     void deserializeExtensiveData() throws IOException {
+        String ratesExtensiveExampleFunctional = path + "rates-extensive-example-functional.json";
         var data = Files.readString(Paths.get(ratesExtensiveExampleFunctional));
         Map<String, Double> result =  deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType());
-        assertNotNull(result);
-        assertEquals(result.size(), 168);
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(result.size(), 168);
     }
 
     @Test
     void deserializeCathyErrorOnInvalidDataKey() throws IOException {
+        String ratesExampleWithEmptyKey = path + "rates-example-with-problem-empty-key.json";
         var data = Files.readString(Paths.get(ratesExampleWithEmptyKey));
 
-        JsonSyntaxException exception = assertThrows(JsonSyntaxException.class, () -> {
-            deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType());
-        });
+        JsonSyntaxException exception = Assertions.assertThrows(JsonSyntaxException.class, () ->
+            deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType())
+        );
 
-        assertNotNull(exception);
+        Assertions.assertNotNull(exception);
     }
 
     @Test
     void deserializeCathyErrorOnInvalidDataValue() throws IOException {
+        String ratesExampleWithEmptyValue = path + "rates-example-with-problem-empty-value.json";
         var data = Files.readString(Paths.get(ratesExampleWithEmptyValue));
 
-        JsonSyntaxException exception = assertThrows(JsonSyntaxException.class, () -> {
-            deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType());
-        });
+        JsonSyntaxException exception = Assertions.assertThrows(JsonSyntaxException.class, () ->
+            deserialize.fromJson(data, new TypeToken<Map<String, Double>>(){}.getType())
+        );
 
-        assertNotNull(exception);
+        Assertions.assertNotNull(exception);
     }
 
 }

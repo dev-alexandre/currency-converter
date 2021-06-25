@@ -26,7 +26,6 @@ class LocalDateTimeAdapterTest {
 
     private final String path = "src/test/java/resources/localDateTimeAdapter/";
     private final String exampleData = path + "local-date-time-functional.json";
-    private final String exampleDataWrong = path + "local-date-time-wrong.json";
 
     private Gson deserialize;
 
@@ -47,29 +46,30 @@ class LocalDateTimeAdapterTest {
         JsonElement testableElement = json.get("date");
         LocalDateTime localDate =  deserialize.fromJson(testableElement, new TypeToken<LocalDateTime>(){}.getType());
 
-        assertNotNull(localDate);
+        Assertions.assertNotNull(localDate);
     }
 
     @Test
     void deserializeLocalDateTimeAdapterTestValues() throws IOException {
         var data = Files.readString(Paths.get(exampleData));
-        LocalDateTime desiredDate = LocalDateTime.of(2021,06,25,1,33,37);
+        LocalDateTime desiredDate = LocalDateTime.of(2021, 6,25,1,33,37);
 
         JsonObject json = deserialize.fromJson(data, new TypeToken<JsonObject>(){}.getType());
         JsonElement testableElement = json.get("date");
         LocalDateTime localDate =  deserialize.fromJson(testableElement, new TypeToken<LocalDateTime>(){}.getType());
 
-        assertEquals(localDate, desiredDate);
+        Assertions.assertEquals(localDate, desiredDate);
     }
 
     @Test
     void deserializeDateWrongFormatter() throws IOException{
+        String exampleDataWrong = path + "local-date-time-wrong.json";
         var data = Files.readString(Paths.get(exampleDataWrong));
         JsonObject json = deserialize.fromJson(data, new TypeToken<JsonObject>(){}.getType());
 
-        Exception exception = assertThrows(Exception.class, () -> {
-            deserialize.fromJson(json.get("date"), new TypeToken<LocalDate>(){}.getType());
-        });
+        Exception exception = assertThrows(Exception.class, () ->
+            deserialize.fromJson(json.get("date"), new TypeToken<LocalDate>(){}.getType())
+        );
 
         Assertions.assertNotNull(exception);
     }

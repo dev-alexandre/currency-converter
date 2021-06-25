@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @RestController
 @Api(value = "converter")
 public class ConvertController {
-    Logger logger = LoggerFactory.getLogger(ConvertController.class);
+    final Logger logger = LoggerFactory.getLogger(ConvertController.class);
 
     @Autowired
     private ConverterService service;

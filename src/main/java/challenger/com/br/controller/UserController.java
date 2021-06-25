@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 
 @RestController
 public class UserController {
-    Logger logger = LoggerFactory.getLogger(UserController.class);
+    final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService service;

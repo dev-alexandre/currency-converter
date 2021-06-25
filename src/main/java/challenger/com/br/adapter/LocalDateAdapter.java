@@ -12,8 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class LocalDateAdapter implements JsonDeserializer<LocalDate> {
-
-    Logger logger = LoggerFactory.getLogger(LocalDateAdapter.class);
+    final Logger logger = LoggerFactory.getLogger(LocalDateAdapter.class);
 
     @Override
     public LocalDate deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

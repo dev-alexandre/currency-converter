@@ -15,10 +15,11 @@ import retrofit2.Response;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ExchangeRatesService {
-    Logger logger = LoggerFactory.getLogger(ExchangeRatesService.class);
+    final Logger logger = LoggerFactory.getLogger(ExchangeRatesService.class);
 
     @Autowired
     private AppEnvironment appConfig;
@@ -50,7 +51,7 @@ public class ExchangeRatesService {
 
             Response<ExchangeRatesResponseDTO> response = callSync.execute();
             ExchangeRatesResponseDTO result = response.body();
-            result.setCurrencies(new ArrayList<>(result.getRates().keySet()));
+            result.setCurrencies(new ArrayList<>(Optional.ofNullable(result.getRates().keySet()).orElseThrow()));
             appCache.setExchangeRatesResponseDTO(result);
 
             return result;

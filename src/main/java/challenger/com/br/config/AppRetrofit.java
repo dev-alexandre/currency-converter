@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Service
 public class AppRetrofit {
-    Logger logger = LoggerFactory.getLogger(AppRetrofit.class);
+    final Logger logger = LoggerFactory.getLogger(AppRetrofit.class);
 
     @Autowired
     private AppEnvironment appEnvironment;

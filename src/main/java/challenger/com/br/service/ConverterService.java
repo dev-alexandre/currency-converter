@@ -20,7 +20,7 @@ import java.util.List;
 
 @Service
 public class ConverterService {
-    Logger logger = LoggerFactory.getLogger(ConverterService.class);
+    final Logger logger = LoggerFactory.getLogger(ConverterService.class);
 
     @Autowired
     private ExchangeRatesService exchangeRatesService;

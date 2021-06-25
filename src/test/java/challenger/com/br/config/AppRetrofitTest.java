@@ -1,12 +1,10 @@
 package challenger.com.br.config;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest
 @ContextConfiguration
@@ -21,8 +19,8 @@ class AppRetrofitTest {
     @Test
     void testingRetrofitInitializerAndOptions() {
         var retrofit = appRetrofit.getRetrofit();
-        assertNotNull(retrofit);
-        assertEquals(retrofit.baseUrl().toString(), appEnvironment.getApiExchangeRatesBaseUrl());
+        Assertions.assertNotNull(retrofit);
+        Assertions.assertEquals(retrofit.baseUrl().toString(), appEnvironment.getApiExchangeRatesBaseUrl());
     }
 
 }
