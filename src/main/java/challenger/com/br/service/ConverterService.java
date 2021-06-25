@@ -1,24 +1,28 @@
 package challenger.com.br.service;
 
+import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
-import challenger.com.br.model.Operation;
 import challenger.com.br.exception.BadParameterException;
+import challenger.com.br.model.Operation;
 import challenger.com.br.repository.OperationRepository;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ConverterService {
     final Logger logger = LoggerFactory.getLogger(ConverterService.class);
 
@@ -30,6 +34,9 @@ public class ConverterService {
 
     @Autowired
     private CalculationEngine calculationEngine;
+
+    @Autowired
+    private AppEnvironment appEnvironment;
 
     public Mono<Operation> converterAmount(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount) {
 
@@ -79,7 +86,7 @@ public class ConverterService {
        return Operation
         .builder()
         .userId(userId)
-        .operationDate(LocalDateTime.now())
+        .operationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern(appEnvironment.getApiFormatDateTime())))
         .amountTo(result)
            .amountFrom(amount)
            .currencyFrom(currencyFrom)

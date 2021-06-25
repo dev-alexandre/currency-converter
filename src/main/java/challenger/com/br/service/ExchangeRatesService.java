@@ -32,7 +32,6 @@ public class ExchangeRatesService {
 
     public ExchangeRatesResponseDTO getExchangeRates(){
 
-
         if(appCache.getExchangeRatesResponseDTO() != null && LocalDate.now().isEqual(appCache.getExchangeRatesResponseDTO().getDate())){
             logger.info("Getting exchange rates from cache");
             return appCache.getExchangeRatesResponseDTO();

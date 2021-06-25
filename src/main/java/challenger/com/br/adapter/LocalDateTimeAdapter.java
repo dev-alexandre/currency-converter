@@ -18,10 +18,9 @@ import java.time.ZoneOffset;
 @Service
 public class LocalDateTimeAdapter implements JsonDeserializer<LocalDateTime> {
     final Logger logger = LoggerFactory.getLogger(LocalDateTimeAdapter.class);
+
     @Autowired
     private AppEnvironment appEnvironment;
-
-
 
     @Override
     public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
@@ -30,7 +29,7 @@ public class LocalDateTimeAdapter implements JsonDeserializer<LocalDateTime> {
         var rawString = jsonElement.getAsString();
         var jsonValueAsLong = Long.parseLong(rawString);
 
-        ZoneId zone = ZoneId.of(appEnvironment.getTimeZone());
+        ZoneId zone = ZoneId.of("UTC");
         ZoneOffset zoneOffSet = zone.getRules().getOffset(LocalDateTime.now());
 
         return LocalDateTime.ofEpochSecond(jsonValueAsLong, 0, zoneOffSet);

@@ -25,7 +25,7 @@ public class ConvertController {
     @GetMapping(
             value = "/converter/user/{userId}/from/{currencyFrom}/to/{currencyTo}/amount/{amount}",
             produces = { "application/json" })
-    public Mono<Operation> converterAmountMono(
+    public Mono<Operation> converterAmount(
             @ApiParam(value = "Numeric ID of the user to get",required=true) @PathVariable Integer userId,
             @ApiParam(value = "Currency identity code ex USD or BRL",required=true) @PathVariable String currencyFrom,
             @ApiParam(value = "Currency identity code ex USD or BRL",required=true) @PathVariable String currencyTo,
