@@ -19,14 +19,12 @@
 	<properties>
 		<java.version>11</java.version>
 		<swagger.version>2.9.2</swagger.version>
-		<swagger-codegen-maven-plugin-version>2.3.1</swagger-codegen-maven-plugin-version>
 
 		<retrofit.version>2.9.0</retrofit.version>
 
 		<sonar.projectKey>dev-alexandre_currency-converter</sonar.projectKey>
 		<sonar.organization>dev-alexandre</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.coverage.exclusions>**/model/*,**/dto/*,</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
