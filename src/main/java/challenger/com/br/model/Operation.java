@@ -6,11 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -24,21 +24,27 @@ public class Operation {
     private Integer id;
 
     @NotNull
+    @Column(value = "user_id")
     private Integer userId;
 
     @NotNull
-    private LocalDateTime operationDate;
+    @Column(value = "operation_date")
+    private String operationDate;
 
     @NotNull
+    @Column(value = "currency_from")
     private String currencyFrom;
 
     @NotNull
+    @Column(value = "currency_to")
     private String currencyTo;
 
     @NotNull
+    @Column(value = "amount_from")
     private BigDecimal amountFrom;
 
     @NotNull
+    @Column(value = "amount_to")
     private BigDecimal amountTo;
 
 }

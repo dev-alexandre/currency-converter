@@ -34,3 +34,6 @@ api:
     time: hh:mm:ss
     timezone: UTC
 
+logging:
+  level:
+    root: DEBUG
