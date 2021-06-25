@@ -1,10 +1,8 @@
 package challenger.com.br.exception;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 @SpringBootTest
 class BadParameterExceptionTest {
@@ -12,14 +10,14 @@ class BadParameterExceptionTest {
 
     @Test
     void mustBeInitialize(){
-         var badParameterException = new BadParameterException(exampleMessage);
-        assertNotNull(badParameterException);
+        var badParameterException = new BadParameterException(exampleMessage);
+        Assertions.assertNotNull(badParameterException);
     }
 
     @Test
     void mustContainMessageCorrectly(){
-         var badParameterException = new BadParameterException(exampleMessage);
-         assertEquals(badParameterException.getMessage(), exampleMessage);
+        var badParameterException = new BadParameterException(exampleMessage);
+        Assertions.assertEquals(badParameterException.getMessage(), exampleMessage);
     }
 
 }

@@ -17,11 +17,11 @@ import java.time.ZoneOffset;
 
 @Service
 public class LocalDateTimeAdapter implements JsonDeserializer<LocalDateTime> {
-
+    final Logger logger = LoggerFactory.getLogger(LocalDateTimeAdapter.class);
     @Autowired
     private AppEnvironment appEnvironment;
 
-    Logger logger = LoggerFactory.getLogger(LocalDateTimeAdapter.class);
+
 
     @Override
     public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {

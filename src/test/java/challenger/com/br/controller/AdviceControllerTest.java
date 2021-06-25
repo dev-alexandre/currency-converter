@@ -25,7 +25,7 @@ class AdviceControllerTest {
     @Test
     void badParameterException() {
         ResponseEntity<Map<String, Object>> responseEntity = adviceController.badParameterException(new BadParameterException(exampleMessage));
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         assertTrue(responseEntity.getBody().containsKey("timestamp"));
         assertTrue(responseEntity.getBody().containsKey("message"));
         assertEquals(responseEntity.getBody().get("message"),exampleMessage);
@@ -34,7 +34,7 @@ class AdviceControllerTest {
     @Test
     void thirdPartyException() {
         ResponseEntity<Map<String, Object>> responseEntity = adviceController.thirdPartyException(new ThirdPartyException(exampleMessage));
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.SERVICE_UNAVAILABLE);
+        assertEquals(HttpStatus.SERVICE_UNAVAILABLE, responseEntity.getStatusCode() );
         assertTrue(responseEntity.getBody().containsKey("timestamp"));
         assertTrue(responseEntity.getBody().containsKey("message"));
         assertEquals(responseEntity.getBody().get("message"),exampleMessage);
