@@ -64,11 +64,4 @@ class ExchangeRatesServiceTest {
         Assertions.assertNotNull(exchangeRatesService.getExchangeRates());
     }
 
-    @Test
-    public void loadExchangeRatesRepository(){
-        when(dataUtil.getLocalDate()).thenReturn(LocalDate.of(2001,1,1));
-
-        exchangeRatesService.getExchangeRates();
-    }
-
 }

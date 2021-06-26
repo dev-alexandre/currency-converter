@@ -1,3 +1,9 @@
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /api-docs.html
+
 spring:
   datasource:
     continue-on-error: true
@@ -37,3 +43,4 @@ api:
 logging:
   level:
     root: INFO
+
