@@ -17,10 +17,11 @@ import java.util.Map;
 @ControllerAdvice
 public class AdviceController {
     final Logger logger = LoggerFactory.getLogger(AdviceController.class);
+    static final String DATE_PATTERN = "yyyy-mm-dd hh:mm:ss";
 
     private Map<String, Object> getBody(Exception exception) {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss")));
+        body.put("timestamp", LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
         body.put("message", exception.getMessage());
         return body;
     }

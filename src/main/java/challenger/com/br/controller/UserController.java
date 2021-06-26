@@ -18,7 +18,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping(
-        value = "/user/historical/{userId}",
+        value = "/user/history/{userId}",
         produces = {"application/json"})
     public Flux<Operation> listOperationByUser(@PathVariable Integer userId){
         logger.info("Caller User Controller");
