@@ -1,5 +1,6 @@
 package challenger.com.br.service;
 
+import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.model.Operation;
 import org.junit.jupiter.api.Assertions;
@@ -31,6 +32,9 @@ public class ConverterServiceTest {
 
     @Autowired
     private ConverterService converterService;
+
+    @MockBean
+    private AppEnvironment appEnvironment;
 
     public ExchangeRatesResponseDTO exampleData;
 
@@ -120,6 +124,7 @@ public class ConverterServiceTest {
     public void converterAmount(){
 
         when(exchangeRatesService.getExchangeRates()).thenReturn(exampleData);
+        when(appEnvironment.getApiFormatDateTime()).thenReturn("yyyy-mm-dd hh:mm:ss");
         Operation build = Operation.builder().build();
 
         Mono<Operation> operationMono = converterService.converterAmount(10, "BRL", "USD", BigDecimal.ONE);

@@ -67,4 +67,13 @@ class CalculationEngineTest {
         assertEquals(calculate, finalValue);
     }
 
+    @Test
+    void calculateRates(){
+        MonetaryAmount brl = Money.of(2, "BRL");
+        MonetaryAmount usd = Money.of(2, "BRL");
+
+        BigDecimal rate = new CalculationEngine().getRate(brl, usd);
+
+        Assertions.assertEquals(rate.setScale(1), BigDecimal.ONE.setScale(1));
+    }
 }

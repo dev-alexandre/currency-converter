@@ -44,6 +44,10 @@ public class Operation {
     private BigDecimal amountFrom;
 
     @NotNull
+    @Column(value = "rate")
+    private BigDecimal rate;
+
+    @NotNull
     @Column(value = "amount_to")
     private BigDecimal amountTo;
 
