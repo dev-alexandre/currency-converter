@@ -12,8 +12,7 @@ public class UserService {
     @Autowired
     private OperationRepository repository;
 
-    public Flux<Operation> listOperationByUser(Integer userId){
+    public Flux<Operation> findAllByUserId(Integer userId){
         return repository.findAllByUserId(userId);
     }
-
 }

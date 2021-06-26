@@ -12,10 +12,10 @@ import java.util.List;
 public class CurrencyService {
 
     @Autowired
-    private ExchangeRatesService exchangeRatesService;
+    private ExchangeRatesService service;
 
     public Mono<List<String>> getAcceptedCurrencies() {
-        ExchangeRatesResponseDTO exchangeRates = exchangeRatesService.getExchangeRates();
+        ExchangeRatesResponseDTO exchangeRates = service.getExchangeRates();
         return Mono.just(new ArrayList<>(exchangeRates.getRates().keySet()));
     }
 }
