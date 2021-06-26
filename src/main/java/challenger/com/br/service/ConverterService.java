@@ -1,16 +1,13 @@
 package challenger.com.br.service;
 
-import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.exception.BadParameterException;
 import challenger.com.br.model.Operation;
-import challenger.com.br.repository.OperationRepository;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 import javax.money.Monetary;
@@ -22,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class ConverterService {
     final Logger logger = LoggerFactory.getLogger(ConverterService.class);
 
@@ -30,13 +26,10 @@ public class ConverterService {
     private ExchangeRatesService exchangeRatesService;
 
     @Autowired
-    private OperationRepository operationRepository;
+    private OperationService operationService;
 
     @Autowired
     private CalculationEngine calculationEngine;
-
-    @Autowired
-    private AppEnvironment appEnvironment;
 
     public Mono<Operation> converterAmount(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount) {
 
@@ -77,7 +70,7 @@ public class ConverterService {
                         exchangeRates,
                         calculationEngine.calculate( monetaryAmountFrom ,  monetaryAmountTo,  amount));
 
-        operationRepository.save(responseObject).subscribe();
+        operationService.save(responseObject);
 
         return Mono.just(responseObject);
     }
@@ -86,15 +79,13 @@ public class ConverterService {
        return Operation
         .builder()
         .userId(userId)
-        .operationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern(appEnvironment.getApiFormatDateTime())))
+        .operationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss")))
         .amountTo(result)
-           .amountFrom(amount)
-           .currencyFrom(currencyFrom)
-           .currencyTo(currencyTo)
+       .amountFrom(amount)
+       .currencyFrom(currencyFrom)
+       .currencyTo(currencyTo)
         .build();
     }
-
-
 
     public void validParameters(String currencyFrom, String currencyTo, BigDecimal amount, ExchangeRatesResponseDTO exchangeRates){
         validCurrency(currencyFrom, exchangeRates);

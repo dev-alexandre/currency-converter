@@ -4,15 +4,14 @@ import challenger.com.br.model.Operation;
 import challenger.com.br.repository.OperationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 
 @Service
-public class UserService {
+public class OperationService {
 
     @Autowired
-    private OperationRepository repository;
+    private OperationRepository operationRepository;
 
-    public Flux<Operation> findAllByUserId(Integer userId){
-        return repository.findAllByUserId(userId);
+    public void save(Operation operation){
+       operationRepository.save(operation).subscribe();
     }
 }

@@ -22,7 +22,7 @@ public class UserController {
         produces = {"application/json"})
     public Flux<Operation> listOperationByUser(@PathVariable Integer userId){
         logger.info("Caller User Controller");
-        return service.listOperationByUser(userId);
+        return service.findAllByUserId(userId);
     }
 
 }

@@ -17,7 +17,6 @@ import java.time.LocalDate;
 
 import static org.junit.Assert.assertThrows;
 
-
 @SpringBootTest
 @ContextConfiguration
 class LocalDateAdapterTest {

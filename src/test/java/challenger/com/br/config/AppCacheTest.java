@@ -20,7 +20,7 @@ class AppCacheTest {
 
     @Test
     void propertyMustBeNullOnStartup(){
-        Assertions.assertNotNull(appCache.getExchangeRatesResponseDTO());
+        Assertions.assertNull(appCache.getExchangeRatesResponseDTO());
     }
 
 }
