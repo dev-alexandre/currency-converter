@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 public class Operation {
 
     @Id
-    @JsonProperty("transactionId")
+    @JsonProperty("TransactionID")
     private Integer id;
 
     @NotNull
@@ -38,10 +38,6 @@ public class Operation {
     @NotNull
     @Column(value = "currency_to")
     private String currencyTo;
-
-    @NotNull
-    @Column(value = "rate")
-    private BigDecimal rate;
 
     @NotNull
     @Column(value = "amount_from")
