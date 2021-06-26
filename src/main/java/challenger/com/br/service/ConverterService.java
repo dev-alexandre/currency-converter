@@ -1,5 +1,6 @@
 package challenger.com.br.service;
 
+import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.exception.BadParameterException;
 import challenger.com.br.model.Operation;
@@ -31,6 +32,9 @@ public class ConverterService {
     @Autowired
     private CalculationEngine calculationEngine;
 
+    @Autowired
+    private AppEnvironment appEnvironment;
+
     public Mono<Operation> converterAmount(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount) {
 
         ExchangeRatesResponseDTO exchangeRates = exchangeRatesService.getExchangeRates();
@@ -40,9 +44,6 @@ public class ConverterService {
 
         exchangeRates.getRates().forEach((key,value) -> {
 
-            /**
-             * @TODO do this better
-             * */
             if(Monetary.isCurrencyAvailable(key)){
                 monetaryAmounts.add(Money.of(value, key ));
             }
@@ -52,13 +53,13 @@ public class ConverterService {
             .stream()
                 .filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyFrom))
                 .findFirst()
-                .orElseThrow(() -> new BadParameterException(""));
+                .orElseThrow(() -> new BadParameterException("A currency not supported was found"));
 
         var monetaryAmountTo = monetaryAmounts
             .stream()
                 .filter(f -> f.getCurrency().getCurrencyCode().equalsIgnoreCase(currencyTo))
                 .findFirst()
-                .orElseThrow(() -> new BadParameterException(""));
+                .orElseThrow(() -> new BadParameterException("A currency not supported was found"));
 
 
         Operation responseObject =
@@ -68,6 +69,7 @@ public class ConverterService {
                         currencyTo,
                         amount,
                         exchangeRates,
+                        calculationEngine.getRate(monetaryAmountFrom, monetaryAmountTo),
                         calculationEngine.calculate( monetaryAmountFrom ,  monetaryAmountTo,  amount));
 
         operationService.save(responseObject);
@@ -75,16 +77,17 @@ public class ConverterService {
         return Mono.just(responseObject);
     }
 
-    private Operation createResponseObject(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount, ExchangeRatesResponseDTO exchangeRates, BigDecimal result) {
+    private Operation createResponseObject(Integer userId, String currencyFrom, String currencyTo, BigDecimal amount, ExchangeRatesResponseDTO exchangeRates,BigDecimal rate,  BigDecimal result) {
        return Operation
-        .builder()
-        .userId(userId)
-        .operationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss")))
-        .amountTo(result)
-       .amountFrom(amount)
-       .currencyFrom(currencyFrom)
-       .currencyTo(currencyTo)
-        .build();
+            .builder()
+                .userId(userId)
+                .operationDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern(appEnvironment.getApiFormatDateTime())))
+                .amountTo(result)
+                .rate(rate)
+                .amountFrom(amount)
+                .currencyFrom(currencyFrom)
+                .currencyTo(currencyTo)
+            .build();
     }
 
     public void validParameters(String currencyFrom, String currencyTo, BigDecimal amount, ExchangeRatesResponseDTO exchangeRates){

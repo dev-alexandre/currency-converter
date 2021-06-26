@@ -27,7 +27,7 @@ class UserControllerTest {
     private UserService repository;
 
     private Flux<Operation> operationFlux;
-    private final String route = "/user/historical/10";
+    private final String route = "/user/history/10";
 
     private final Integer id = 1;
     private final Integer userId = 10;

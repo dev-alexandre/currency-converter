@@ -1,14 +1,13 @@
 package challenger.com.br.service;
 
+import challenger.com.br.config.AppEnvironment;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.model.Operation;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +18,6 @@ import java.util.Map;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 @WebFluxTest(ConverterService.class)
 public class ConverterServiceTest {
 
@@ -34,6 +32,9 @@ public class ConverterServiceTest {
 
     @Autowired
     private ConverterService converterService;
+
+    @MockBean
+    private AppEnvironment appEnvironment;
 
     public ExchangeRatesResponseDTO exampleData;
 
@@ -123,6 +124,7 @@ public class ConverterServiceTest {
     public void converterAmount(){
 
         when(exchangeRatesService.getExchangeRates()).thenReturn(exampleData);
+        when(appEnvironment.getApiFormatDateTime()).thenReturn("yyyy-mm-dd hh:mm:ss");
         Operation build = Operation.builder().build();
 
         Mono<Operation> operationMono = converterService.converterAmount(10, "BRL", "USD", BigDecimal.ONE);

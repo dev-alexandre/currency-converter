@@ -1,20 +1,17 @@
 package challenger.com.br.service;
 
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
 @WebFluxTest(CurrencyService.class)
 public class CurrencyServiceTest {
 
