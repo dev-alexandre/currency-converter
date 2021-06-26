@@ -3,18 +3,36 @@ package challenger.com.br.service;
 import challenger.com.br.model.Operation;
 import challenger.com.br.repository.OperationRepository;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
 
-import static reactor.core.publisher.Mono.when;
+import static org.mockito.Mockito.when;
 
-class UserServiceTest {
+@RunWith(SpringRunner.class)
+@WebFluxTest(UserService.class)
+public class UserServiceTest {
 
+    @MockBean
     private OperationRepository repository;
 
+    @Autowired
+    private UserService service;
+
+
+    public UserServiceTest(){}
+
     @Test
-    void mustReturnOperation(){
-        Operation operation = Operation.builder().build();
+    public void findUserByID(){
 
-        when(repository.findAllByUserId(10)).thenReturn(null);
+        Flux<Operation> findAllByUserId = Flux.just(Operation.builder().userId(1).build());
+
+        when(repository.findAllByUserId(1)).thenReturn(findAllByUserId);
+
+        Assertions.assertNotNull(service.findAllByUserId(1));
     }
-
 }

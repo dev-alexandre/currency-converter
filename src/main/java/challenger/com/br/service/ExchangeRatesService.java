@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -30,9 +29,12 @@ public class ExchangeRatesService {
     @Autowired
     private AppCache appCache;
 
+    @Autowired
+    private DataUtil dataUtil;
+
     public ExchangeRatesResponseDTO getExchangeRates(){
 
-        if(appCache.getExchangeRatesResponseDTO() != null && LocalDate.now().isEqual(appCache.getExchangeRatesResponseDTO().getDate())){
+        if(appCache.getExchangeRatesResponseDTO() != null && dataUtil.getLocalDate().isEqual(appCache.getExchangeRatesResponseDTO().getDate())){
             logger.info("Getting exchange rates from cache");
             return appCache.getExchangeRatesResponseDTO();
         }
@@ -40,7 +42,7 @@ public class ExchangeRatesService {
         return loadExchangeRatesRepository();
     }
 
-    public ExchangeRatesResponseDTO loadExchangeRatesRepository(){
+    private ExchangeRatesResponseDTO loadExchangeRatesRepository(){
         logger.info("Calling exchange rates api");
 
         ExchangeRatesRepository repository = retrofit.getRetrofit().create(ExchangeRatesRepository.class);
@@ -60,4 +62,5 @@ public class ExchangeRatesService {
             throw new ThirdPartyException("A third party service is not working as it should, wait a while and try again in a few minutes");
         }
     }
+
 }

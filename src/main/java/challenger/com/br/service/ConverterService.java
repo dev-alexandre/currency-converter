@@ -3,7 +3,6 @@ package challenger.com.br.service;
 import challenger.com.br.dto.ExchangeRatesResponseDTO;
 import challenger.com.br.exception.BadParameterException;
 import challenger.com.br.model.Operation;
-import challenger.com.br.repository.OperationRepository;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,7 @@ public class ConverterService {
     private ExchangeRatesService exchangeRatesService;
 
     @Autowired
-    private OperationRepository operationRepository;
+    private OperationService operationService;
 
     @Autowired
     private CalculationEngine calculationEngine;
@@ -71,7 +70,7 @@ public class ConverterService {
                         exchangeRates,
                         calculationEngine.calculate( monetaryAmountFrom ,  monetaryAmountTo,  amount));
 
-        operationRepository.save(responseObject).subscribe();
+        operationService.save(responseObject);
 
         return Mono.just(responseObject);
     }
@@ -87,8 +86,6 @@ public class ConverterService {
        .currencyTo(currencyTo)
         .build();
     }
-
-
 
     public void validParameters(String currencyFrom, String currencyTo, BigDecimal amount, ExchangeRatesResponseDTO exchangeRates){
         validCurrency(currencyFrom, exchangeRates);
