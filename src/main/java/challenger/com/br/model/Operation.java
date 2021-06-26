@@ -1,11 +1,9 @@
 package challenger.com.br.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -14,6 +12,7 @@ import java.math.BigDecimal;
 
 @Data
 @Builder
+@With
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("operation")
@@ -47,8 +46,6 @@ public class Operation {
     @Column(value = "rate")
     private BigDecimal rate;
 
-    @NotNull
-    @Column(value = "amount_to")
+    @Transient
     private BigDecimal amountTo;
-
 }
