@@ -7,6 +7,7 @@ CREATE TABLE operation (
     operation_date VARCHAR(255),
     currency_from VARCHAR(255),
     currency_to VARCHAR(255),
+    rate numeric(10,2),
     amount_from numeric(10,2),
     amount_to numeric(10,2)
 );
